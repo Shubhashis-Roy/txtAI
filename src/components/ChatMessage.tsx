@@ -7,14 +7,14 @@ interface Props {
 const senderConfig = {
   user: {
     name: "You",
-    avatar: "🙂",
+    avatar: "/user.png",
     bg: "#2563eb",
     color: "#fff",
     align: "flex-end" as const,
   },
   ai: {
     name: "Spur Support",
-    avatar: "🤖",
+    avatar: "/chat.png",
     bg: "#ffffff",
     color: "#111",
     align: "flex-start" as const,
@@ -35,12 +35,20 @@ export default function ChatMessage({ message }: Props) {
     >
       {/* AI AVATAR */}
       {!isUser && (
-        <div style={{ marginRight: "8px", fontSize: "20px" }}>
-          {config.avatar}
-        </div>
+        <img
+          src={config.avatar}
+          alt={config.name}
+          style={{
+            width: "32px",
+            height: "32px",
+            borderRadius: "50%",
+            marginRight: "8px",
+            objectFit: "contain",
+          }}
+        />
       )}
 
-      {/* NAME + BUBBLE (GROUPED) */}
+      {/* NAME + BUBBLE */}
       <div
         style={{
           maxWidth: "72%",
@@ -67,7 +75,6 @@ export default function ChatMessage({ message }: Props) {
             color: config.color,
             boxShadow: !isUser ? "0 4px 12px rgba(0,0,0,0.08)" : "none",
             lineHeight: 1.4,
-
             wordBreak: "break-word",
             overflowWrap: "break-word",
             whiteSpace: "pre-wrap",
@@ -79,9 +86,17 @@ export default function ChatMessage({ message }: Props) {
 
       {/* USER AVATAR */}
       {isUser && (
-        <div style={{ marginLeft: "8px", fontSize: "20px" }}>
-          {config.avatar}
-        </div>
+        <img
+          src={config.avatar}
+          alt={config.name}
+          style={{
+            width: "32px",
+            height: "32px",
+            borderRadius: "50%",
+            marginLeft: "8px",
+            objectFit: "contain",
+          }}
+        />
       )}
     </div>
   );

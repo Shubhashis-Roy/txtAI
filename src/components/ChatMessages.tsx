@@ -1,13 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import ChatMessage from "./ChatMessage";
+import ChatMessageSkeleton from "./ChatMessageSkeleton";
 import type { MessageTypes } from "../types/chat";
 
 interface Props {
   messages: MessageTypes[];
   loading: boolean;
+  isHistoryLoading?: boolean;
 }
 
-export default function ChatMessages({ messages, loading }: Props) {
+export default function ChatMessages({
+  messages,
+  loading,
+  isHistoryLoading = false,
+}: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const [showScrollDown, setShowScrollDown] = useState(false);
@@ -30,7 +36,7 @@ export default function ChatMessages({ messages, loading }: Props) {
     <div
       style={{
         height: "100%",
-        minHeight: 0, // 🔑 REQUIRED
+        minHeight: 0,
         position: "relative",
         background: "#f9fafb",
       }}
@@ -44,11 +50,20 @@ export default function ChatMessages({ messages, loading }: Props) {
           padding: "16px",
         }}
       >
-        {messages.map((msg) => (
-          <ChatMessage key={msg.id} message={msg} />
-        ))}
+        {/* 🔹 HISTORY SKELETONS */}
+        {isHistoryLoading &&
+          Array.from({ length: 4 }).map((_, i) => (
+            <ChatMessageSkeleton key={i} />
+          ))}
 
-        {loading && (
+        {/* 🔹 REAL MESSAGES */}
+        {!isHistoryLoading &&
+          messages.map((msg) => (
+            <ChatMessage key={msg.id} message={msg} />
+          ))}
+
+        {/* 🔹 TYPING INDICATOR (NOT HISTORY) */}
+        {loading && !isHistoryLoading && (
           <div style={{ fontSize: "12px", color: "#666", marginTop: "6px" }}>
             Spur Support is typing…
           </div>

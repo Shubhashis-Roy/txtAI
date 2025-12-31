@@ -52,8 +52,9 @@ export default function LandingPage() {
         transition={{ duration: 0.8, delay: 0.6 }}
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 320px))',
           gap: '24px',
+          justifyContent: 'start',
         }}
       >
         {[
@@ -64,10 +65,6 @@ export default function LandingPage() {
           {
             title: 'Easy Returns',
             desc: 'Changed your mind? Enjoy simple returns within 30 days—no questions asked.',
-          },
-          {
-            title: '24/7 Assistance',
-            desc: 'Our AI support is available anytime to help you with orders, tracking, and FAQs.',
           },
         ].map((card, i) => (
           <motion.div
@@ -82,16 +79,28 @@ export default function LandingPage() {
               cursor: 'pointer',
             }}
           >
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '10px', color: '#111827' }}>
+            <h3
+              style={{
+                fontSize: '1.25rem',
+                fontWeight: 600,
+                marginBottom: '10px',
+                color: '#111827',
+              }}
+            >
               {card.title}
             </h3>
-            <p style={{ fontSize: '1rem', color: '#4b5563', lineHeight: 1.5 }}>
+            <p
+              style={{
+                fontSize: '1rem',
+                color: '#4b5563',
+                lineHeight: 1.5,
+              }}
+            >
               {card.desc}
             </p>
           </motion.div>
         ))}
       </motion.div>
-
     </div>
   );
 }
