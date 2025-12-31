@@ -90,7 +90,7 @@ export default function ChatWidget() {
                     marginTop: "2px",
                   }}
                 >
-                  We usually respond within 10 minutes
+                  Message us anytime, we reply instantly.
                 </div>
                 <button
                   onClick={() => openChat()}
